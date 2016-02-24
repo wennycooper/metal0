@@ -22,7 +22,8 @@ bool my_update(const sensor_msgs::LaserScan& input_scan)
     if (input_scan.ranges[i] > 0.1)
       filtered_scan.ranges[count] = input_scan.ranges[i];
     else
-      filtered_scan.ranges[count] = NAN;
+      //filtered_scan.ranges[count] = NAN;
+      filtered_scan.ranges[count] = 1e300;
 
     filtered_scan.intensities[count] = input_scan.intensities[i];
     ++count;
@@ -33,7 +34,8 @@ bool my_update(const sensor_msgs::LaserScan& input_scan)
     if (input_scan.ranges[i] > 0.1)
       filtered_scan.ranges[count] = input_scan.ranges[i];
     else
-      filtered_scan.ranges[count] = NAN;
+      //filtered_scan.ranges[count] = NAN;
+      filtered_scan.ranges[count] = 1e300;
     
     
     filtered_scan.intensities[count] = input_scan.intensities[i];

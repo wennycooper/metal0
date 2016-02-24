@@ -21,7 +21,7 @@ bool my_update(const sensor_msgs::LaserScan& input_scan)
     if(input_scan.ranges[i] > 5.0 ||
        isnan(input_scan.ranges[i]) ||
        isinf(input_scan.ranges[i])) {
-      filtered_scan.ranges[i] = 5.0;
+      filtered_scan.ranges[i] = 5.0 - 0.0001;
       filtered_scan.intensities[i] = input_scan.intensities[i];
     }
     else {
