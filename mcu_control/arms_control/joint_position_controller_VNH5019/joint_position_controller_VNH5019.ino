@@ -184,7 +184,7 @@ void control_loop(){
                   //PWM testing 反轉
                   //digitalWrite(MotorINA,0);digitalWrite(MotorINB,1);analogWrite(MotorPWM,255); 
                   //position control
-                  go_joint_pos_ros(90);            
+                  go_joint_pos_ros(cmdPos_ROS);            
                 }              
             }
 
