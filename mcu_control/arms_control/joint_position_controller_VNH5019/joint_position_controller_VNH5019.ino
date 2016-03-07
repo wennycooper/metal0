@@ -64,7 +64,7 @@ struct mySerialSendByte{
   };
 mySerialSendByte mySerialSendByte;
 double cmdPwm=0;
-double cmdPos_ROS=-90,anglePos_ROS=0; //degree
+double cmdPos_ROS=0,anglePos_ROS=0; //degree
 double pos_offset=0;
 int pos_offset_v=0;
 double max_working_rage=0;
