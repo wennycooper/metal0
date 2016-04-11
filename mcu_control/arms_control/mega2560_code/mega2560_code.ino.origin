@@ -222,6 +222,7 @@ void setup() {
 
  
  Serial.begin(57600);
+ //Serial.begin(1000000);
  Serial1.begin(57600);
  Serial2.begin(57600);
  
@@ -250,12 +251,12 @@ void loop(){
     cmd_Axis_1_by_1=(double)cmd_Motor_1_by_1/ gearRatio_Axis_1;
     cmd_Axis_1=cmd_Axis_1_by_0+cmd_Axis_1_by_1;    
 
-    cmd_serial_to_uno();
+    ros_serial_loop();
     nh.spinOnce();
   }  
   if (1) {  
-  get_cmd_pos_0();
-  get_cmd_pos_1();
+  //get_cmd_pos_0();
+  //get_cmd_pos_1();
 
   }
   //show();
@@ -290,16 +291,16 @@ void increase_0()
     if((angle_Axis_0-cmd_Axis_0)>0){
       cmd_Motor_0_increment_by_0=increment_angle_0*gearRatio_Axis_0;
       if(ARM_RIGHT_A0_A1_EN)
-        cmd_Motor_1_increment_by_0=increment_angle_0;//*gearRatio_Axis_1*(double)1/gearRatio_Axis_1; 
+        cmd_Motor_1_increment_by_0=increment_angle_0*gearRatio_Axis_1*(double)1/gearRatio_Axis_1; 
       else
-        cmd_Motor_1_increment_by_0=-increment_angle_0;//*gearRatio_Axis_1*(double)1/gearRatio_Axis_1; 
+        cmd_Motor_1_increment_by_0=-increment_angle_0*gearRatio_Axis_1*(double)1/gearRatio_Axis_1; 
     }
     else {
       cmd_Motor_0_increment_by_0=-increment_angle_0*gearRatio_Axis_0;
       if(ARM_RIGHT_A0_A1_EN)
-        cmd_Motor_1_increment_by_0=-increment_angle_0;//*gearRatio_Axis_1*(double)1/gearRatio_Axis_1; 
+        cmd_Motor_1_increment_by_0=-increment_angle_0*gearRatio_Axis_1*(double)1/gearRatio_Axis_1; 
       else
-        cmd_Motor_1_increment_by_0=increment_angle_0;//*gearRatio_Axis_1*(double)1/gearRatio_Axis_1; 
+        cmd_Motor_1_increment_by_0=increment_angle_0*gearRatio_Axis_1*(double)1/gearRatio_Axis_1; 
     }
   }
   else{
@@ -329,10 +330,8 @@ void increase_1()
 
 
 
-void cmd_serial_to_uno(){
+void ros_serial_loop(){
 
-    Serial.print("cmd_Motor_0 ");Serial.print(cmd_Motor_0); 
-    Serial.print("cmd_Motor_1 ");Serial.println(cmd_Motor_1);
     
     mySerialSendByte_0.cS='{';
     mySerialSendByte_0.cSH =highByte(int(offset_v_0));
@@ -398,7 +397,6 @@ void get_cmd_pos_1() {
       }
     }
 }
-
 
 
 
