@@ -134,6 +134,9 @@ include_directories(
 add_executable(mybot_odometry src/mybot_odometry.cpp)
 target_link_libraries(mybot_odometry ${catkin_LIBRARIES})
 
+add_executable(mybot_odom_ekf src/mybot_odom_ekf.cpp)
+target_link_libraries(mybot_odom_ekf ${catkin_LIBRARIES})
+
 add_executable(mybot_base_controller src/mybot_base_controller.cpp)
 target_link_libraries(mybot_base_controller ${catkin_LIBRARIES})
 

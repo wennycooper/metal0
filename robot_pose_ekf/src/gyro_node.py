@@ -29,7 +29,7 @@ class GYRO_Class(object):
                 self._ay = 0
                 self._az = 0
 		
-		port = rospy.get_param("~port", "/dev/ttyUSB0")
+		port = rospy.get_param("~port", "/dev/ttyUSB1")
 		baudRate = int(rospy.get_param("~baudRate", 115200))
 
 		rospy.loginfo("Starting with serial port: " + port + ", baud rate: " + str(baudRate))
@@ -47,7 +47,7 @@ class GYRO_Class(object):
         	self.cal_buffer_length = 1000
         	self.imu_data = Imu(header=rospy.Header(frame_id="IMU_link"))
         	self.imu_data.orientation_covariance = [1e6, 0, 0, 0, 1e6, 0, 0, 0, 1e-6]
-	        self.imu_data.angular_velocity_covariance = [1e6, 0, 0, 0, 1e6, 0, 0, 0, 1e-6]
+	        self.imu_data.angular_velocity_covariance = [1e6, 0, 0, 0, 1e6, 0, 0, 0, 1e6]
         	self.imu_data.linear_acceleration_covariance = [-1,0,0,0,0,0,0,0,0]
         	self.imu_pub = rospy.Publisher('imu_data', Imu,queue_size = 10)
 
@@ -86,22 +86,35 @@ class GYRO_Class(object):
 
 					imu_msg.header = h
 
-					imu_msg.orientation_covariance = (-1., )*9	
-					imu_msg.angular_velocity_covariance = (-1., )*9
-					imu_msg.linear_acceleration_covariance = (-1., )*9
+					#imu_msg.orientation_covariance = (1., )*9	
+        				imu_msg.orientation_covariance = [1e6, 0, 0, 0, 1e6, 0, 0, 0, 1e-6]
+					#imu_msg.angular_velocity_covariance = (1., )*9
+        				imu_msg.angular_velocity_covariance = [1e6, 0, 0, 0, 1e6, 0, 0, 0, 1e6]
+					#imu_msg.linear_acceleration_covariance = (1., )*9
+        				imu_msg.linear_acceleration_covariance = [-1,0,0,0,0,0,0,0,0]
 
 					imu_msg.orientation.x = self._qx
+					#imu_msg.orientation.x = 0
 					imu_msg.orientation.y = self._qy
+					#imu_msg.orientation.y = 0
 					imu_msg.orientation.z = self._qz
+					#imu_msg.orientation.z = 0
 					imu_msg.orientation.w = self._qw
+					#imu_msg.orientation.w = 1
 
 					imu_msg.angular_velocity.x = self._ax
+					#imu_msg.angular_velocity.x = 0
 					imu_msg.angular_velocity.y = self._ay
+					#imu_msg.angular_velocity.y = 0
 					imu_msg.angular_velocity.z = self._az
+					#imu_msg.angular_velocity.z = 0
 
-					imu_msg.linear_acceleration.x = self._lx
-					imu_msg.linear_acceleration.y = self._ly
-					imu_msg.linear_acceleration.z = self._lz
+					#imu_msg.linear_acceleration.x = self._lx
+					imu_msg.linear_acceleration.x = 0
+					#imu_msg.linear_acceleration.y = self._ly
+					imu_msg.linear_acceleration.y = 0
+					#imu_msg.linear_acceleration.z = self._lz
+					imu_msg.linear_acceleration.z = 0
 					
 					self.imu_pub.publish(imu_msg)
 

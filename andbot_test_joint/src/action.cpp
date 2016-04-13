@@ -32,8 +32,10 @@ struct KunFu{
 
 }kunfu=
 {
-  {0,-350,0,0,0},{0,-350,0,0,0},
-  {485,0,0,0,0},{485,0,0,0,0},
+//  {0,-350,0,0,0},{0,-350,0,0,0},
+//  {485,0,0,0,0},{485,0,0,0,0},
+  {200,100,0,0,3},{200,100,0,0,3},
+  {450,100,0,0,3},{450,100,0,0,3},
 
 };
 
@@ -43,7 +45,7 @@ struct HoldTray{
 }holdtray=
 {
   {0,-350,0,0,0},{0,-350,0,0,0},
-  {300,-200,0,0,0},{300,-200,0,0,0},
+  {400,-200,0,0,0},{400,-200,0,0,0},
 };
 
 struct Strong{
@@ -128,13 +130,13 @@ int main(int argc, char** argv)
                 move_to_pose_left(kunfu.left_p0);
                 move_to_pose_right(kunfu.right_p1);
                 ROS_INFO("l:p0 r:p1");
-                if(duration_time>=10) {move_state=2;duration_time=0;}
+                if(duration_time>=5) {move_state=2;duration_time=0;}
                 break;
               case 2:
                 move_to_pose_left(kunfu.left_p1);
                 move_to_pose_right(kunfu.right_p0);
                 ROS_INFO("l:p1 r:p0");
-                if(duration_time>=10) {move_state=1;duration_time=0;}
+                if(duration_time>=5) {move_state=1;duration_time=0;}
                 break;
 
 

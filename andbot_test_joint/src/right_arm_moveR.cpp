@@ -122,7 +122,7 @@ public:
      TH1_MAX=0.01;
       TH1_MIN=-1.57;
   }
-  TH3_MAX=1.57;
+  TH3_MAX=2.2;
   TH3_MIN=-0.01;
 
   move_time=10;
